@@ -1,0 +1,203 @@
+$white: #ffffff;
+$gray-50: #f9fafb;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-400: #9ca3af;
+$gray-600: #4b5563;
+$gray-800: #1f2937;
+$blue-500: #3b82f6;
+$blue-600: #2563eb;
+$green-500: #10b981;
+$green-600: #059669;
+
+$border-radius: 8px;
+$transition: all 0.2s ease;
+
+.container {
+    min-height: 100vh;
+    background: $gray-50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    .content {
+        background: $white;
+        border-radius: $border-radius;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 2.5rem;
+        max-width: 500px;
+        width: 100%;
+        border: 1px solid $gray-200;
+
+        .title {
+            text-align: center;
+            margin-bottom: 2rem;
+
+            img {
+                height: 50px;
+                margin-bottom: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: $gray-800;
+                margin: 0 0 1rem 0;
+                line-height: 1.4;
+            }
+
+            h3 {
+                font-size: 1rem;
+                color: $gray-600;
+                margin: 0;
+                font-weight: 400;
+            }
+        }
+
+        .system_rules {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+
+            li {
+                display: flex;
+                align-items: flex-start;
+                gap: 0.75rem;
+                padding: 0.875rem 1rem;
+                background: $gray-50;
+                border-radius: 6px;
+                border: 1px solid $gray-200;
+                color: $gray-600;
+                font-size: 0.9rem;
+                line-height: 1.4;
+
+                &::before {
+                    content: '•';
+                    color: $blue-500;
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                }
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                .file {
+                    width: 100%;
+                    padding: 1rem;
+                    border: 1px solid $gray-200;
+                    border-radius: $border-radius;
+                    background: $white;
+                    font-size: 0.9rem;
+                    transition: $transition;
+
+                    &:focus {
+                        outline: none;
+                        border-color: $blue-500;
+                        box-shadow: 0 0 0 3px rgba($blue-500, 0.1);
+                    }
+
+                    &::file-selector-button {
+                        background: $gray-100;
+                        color: $gray-800;
+                        border: 1px solid $gray-300;
+                        padding: 0.5rem 1rem;
+                        border-radius: 4px;
+                        margin-right: 1rem;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: $transition;
+
+                        &:hover {
+                            background: $gray-200;
+                        }
+                    }
+                }
+
+                .name_input {
+                    width: 100%;
+                    padding: 1rem;
+                    border: 1px solid $gray-200;
+                    border-radius: $border-radius;
+                    background: $white;
+                    font-size: 0.9rem;
+                    transition: $transition;
+                    font-family: inherit;
+
+                    &::placeholder {
+                        color: $gray-400;
+                    }
+
+                    &:focus {
+                        outline: none;
+                        border-color: $blue-500;
+                        box-shadow: 0 0 0 3px rgba($blue-500, 0.1);
+                    }
+
+                    &:hover {
+                        border-color: $gray-300;
+                    }
+                }
+            }
+
+            .report_submission {
+                background: $blue-500;
+                color: $white;
+                border: none;
+                border-radius: $border-radius;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: $transition;
+
+                &:hover {
+                    background: $blue-600;
+                }
+
+                &:focus {
+                    outline: none;
+                    box-shadow: 0 0 0 3px rgba($blue-500, 0.2);
+                }
+            }
+
+            .view_dashboard {
+                background: $green-500;
+                color: $white;
+                border: none;
+                border-radius: $border-radius;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: $transition;
+                margin-top: 0.5rem;
+
+                &:hover {
+                    background: $green-600;
+                }
+
+                &:focus {
+                    outline: none;
+                    box-shadow: 0 0 0 3px rgba($green-500, 0.2);
+                }
+            }
+        }
+    }
+}
