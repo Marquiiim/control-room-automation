@@ -83,10 +83,9 @@ function filterData(data, columns) {
 
 function registerLog(author, archiveName) {
     try {
-
         const dataLog = {
             author: author,
-            archive: archive
+            archive: archiveName
         }
 
         const dataNow = fs.readFileSync(logPath, 'utf8')
@@ -97,7 +96,7 @@ function registerLog(author, archiveName) {
         fs.writeFileSync(logPath, JSON.stringify(jsonData, null, 2))
 
     } catch (error) {
-        console.log(`[SISTEMA] Erro ao registrar os logs.`)
+        console.log(`[SISTEMA] Erro ao registrar os logs: ${error}`)
     }
 }
 
