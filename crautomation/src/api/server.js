@@ -32,7 +32,7 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
 
         const data = XLSX.utils.sheet_to_json(worksheet)
 
-        const result = await filterData(data, columns)
+        const result = filterData(data, columns)
 
         const log = await registerLog(author, req.file.originalname)
 
@@ -40,7 +40,7 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
             success: true,
             message: '[SISTEMA] Consulta de dados concluída com sucesso.',
             author: author,
-            data: filterData,
+            data: result,
             log: log,
             ...result
         })
@@ -54,12 +54,12 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
     }
 })
 
-async function filterData(data, columns) {
+function filterData(data, columns) {
     if (!data || data.length === 0) {
         throw new Error('[SISTEMA] Planilha vazia ou sem dados.')
     }
 
-    totalColumns = Object.keys(data[0] || {})
+    const totalColumns = Object.keys(data[0] || {})
 
     const columnsFound = totalColumns.filter(column => {
         return columns.some(columnDesired => column.toUpperCase().includes(columnDesired))
