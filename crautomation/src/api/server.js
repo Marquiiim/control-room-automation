@@ -4,6 +4,7 @@ const multer = require('multer')
 const cors = require('cors')
 const fs = require('fs').promises
 const path = require('path')
+const { data } = require('react-router-dom')
 
 const app = express()
 const PORT = 3001
@@ -44,6 +45,7 @@ app.post('/datareading', upload.single('archive'), (req, res) => {
         console.error(`[SISTEMA] Erro ao processar dados: ${error}`)
         res.status(500).json({
             success: false,
+            data: filterData,
             error: `[SISTEMA] Erro ao processar arquivo: ${error.message}`
         })
     }
@@ -56,7 +58,24 @@ function filterData(data, columns) {
 
     totalColumns = Object.keys(data[0] || {})
 
-    console.log(totalColumns)
+    const columnsFound = totalColumns.filter(column => {
+        return columns.some(columnDesired => column.toUpperCase().includes(columnDesired))
+    })
+
+    if (columnsFound.length === 0) {
+        throw new Error(`[SISTEMA] Nenhuma das colunas desejadas foram encontradas, colunas buscadas: ${columns.join(', ')}`)
+    }
+
+    const filteredData = data.map((line, index) => {
+        const lineFiltered = { id: index + 1 }
+
+        columnsFound.forEach(column => {
+            lineFiltered[column] = line[column]
+        });
+        return lineFiltered
+    })
+
+    return filteredData
 }
 
 app.listen(PORT, () => {

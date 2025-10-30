@@ -25,9 +25,10 @@ function App() {
       console.log(response.data)
 
     } catch (error) {
-
+      console.error(`[SISTEMA] Erro ao enviar o relatório:, ${error}`)
+      alert(`[SISTEMA] Erro ao processar o arquivo ${error.message}`)
     }
-  }
+  } 
 
   return (
     <section className={styles.container}>
