@@ -32,9 +32,9 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
 
         const data = XLSX.utils.sheet_to_json(worksheet)
 
-        const result = filterData(data, columns)
+        const result = await filterData(data, columns)
 
-        const log = registerLog(author, req.file.originalname)
+        const log = await registerLog(author, req.file.originalname)
 
         res.status(200).json({
             success: true,
@@ -54,7 +54,7 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
     }
 })
 
-function filterData(data, columns) {
+async function filterData(data, columns) {
     if (!data || data.length === 0) {
         throw new Error('[SISTEMA] Planilha vazia ou sem dados.')
     }
@@ -81,19 +81,20 @@ function filterData(data, columns) {
     return filteredData
 }
 
-function registerLog(author, archiveName) {
+async function registerLog(author, archiveName) {
     try {
         const dataLog = {
             author: author,
-            archive: archiveName
+            archive: archiveName,
+            timestamp: new Date().toLocaleString('pt-BR')
         }
 
-        const dataNow = fs.readFileSync(logPath, 'utf8')
+        const dataNow = await fs.readFile(logPath, 'utf8')
         const jsonData = JSON.parse(dataNow)
 
         jsonData.push(dataLog)
 
-        fs.writeFileSync(logPath, JSON.stringify(jsonData, null, 2))
+        await fs.writeFile(logPath, JSON.stringify(jsonData, null, 2))
 
     } catch (error) {
         console.log(`[SISTEMA] Erro ao registrar os logs: ${error}`)
