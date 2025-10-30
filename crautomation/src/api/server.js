@@ -34,7 +34,7 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
 
         const result = filterData(data, columns)
 
-        const log = await registerLog(author, req.file.originalname)
+        const log = registerLog(author, req.file.originalname)
 
         res.status(200).json({
             success: true,
