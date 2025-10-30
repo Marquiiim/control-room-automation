@@ -4,12 +4,12 @@ const multer = require('multer')
 const cors = require('cors')
 const fs = require('fs').promises
 const path = require('path')
-const { data } = require('react-router-dom')
 
 const app = express()
 const PORT = 3001
 
 const upload = multer({ dest: 'uploads/' })
+const logPath = path.join(__dirname, './data/logs.json')
 
 app.use(cors())
 app.use(express.json())
@@ -34,10 +34,14 @@ app.post('/datareading', upload.single('archive'), (req, res) => {
 
         const result = filterData(data, columns)
 
+        const log = registerLog(author, req.filename)
+
         res.status(200).json({
             success: true,
             message: '[SISTEMA] Consulta de dados concluída com sucesso.',
             author: author,
+            data: filterData,
+            log: '',
             ...result
         })
 
@@ -45,7 +49,6 @@ app.post('/datareading', upload.single('archive'), (req, res) => {
         console.error(`[SISTEMA] Erro ao processar dados: ${error}`)
         res.status(500).json({
             success: false,
-            data: filterData,
             error: `[SISTEMA] Erro ao processar arquivo: ${error.message}`
         })
     }
@@ -76,6 +79,26 @@ function filterData(data, columns) {
     })
 
     return filteredData
+}
+
+function registerLog(author, archiveName) {
+    try {
+
+        const dataLog = {
+            author: author,
+            archive: archive
+        }
+
+        const dataNow = fs.readFileSync(logPath, 'utf8')
+        const jsonData = JSON.parse(dataNow)
+
+        jsonData.push(dataLog)
+
+        fs.writeFileSync(logPath, JSON.stringify(jsonData, null, 2))
+
+    } catch (error) {
+        console.log(`[SISTEMA] Erro ao registrar os logs.`)
+    }
 }
 
 app.listen(PORT, () => {
