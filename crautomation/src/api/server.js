@@ -22,7 +22,7 @@ const columns = [
     'TIPO'
 ]
 
-app.post('/datareading', upload.single('archive'), (req, res) => {
+app.post('/datareading', upload.single('archive'), async (req, res) => {
     try {
         const { author } = req.body
 
@@ -34,14 +34,14 @@ app.post('/datareading', upload.single('archive'), (req, res) => {
 
         const result = filterData(data, columns)
 
-        const log = registerLog(author, req.filename)
+        const log = await registerLog(author, req.file.originalname)
 
         res.status(200).json({
             success: true,
             message: '[SISTEMA] Consulta de dados concluída com sucesso.',
             author: author,
             data: filterData,
-            log: '',
+            log: log,
             ...result
         })
 
