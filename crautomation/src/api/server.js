@@ -40,7 +40,6 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
             success: true,
             message: '[SISTEMA] Consulta de dados concluída com sucesso.',
             author: author,
-            data: result,
             log: log,
             ...result
         })
