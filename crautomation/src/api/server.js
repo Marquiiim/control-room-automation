@@ -96,6 +96,20 @@ async function registerLog(author, archiveName) {
         await fs.writeFile(logPath, JSON.stringify(jsonData, null, 2))
 
     } catch (error) {
+        const dataLog = {
+            author: author,
+            archive: archiveName,
+            reason: error,
+            timestamp: new Date().toLocaleString('pt-BR')
+        }
+
+        const dataNow = await fs.readFile(logPath, 'utf8')
+        const jsonData = JSON.parse(dataNow)
+
+        jsonData.push(dataLog)
+
+        await fs.writeFile(logPath, JSON.stringify(jsonData, null, 2))
+
         console.log(`[SISTEMA] Erro ao registrar os logs: ${error}`)
     }
 }
