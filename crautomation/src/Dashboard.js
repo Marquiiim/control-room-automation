@@ -22,18 +22,18 @@ function Dashboard() {
                         <ol>
                             {data && (
                                 <>
-                                <li>
-                                    Colaborador teste <span className={styles.itens_loja}>349 itens</span>
-                                </li>
-                                <li>
-                                    Colaborador teste <span className={styles.itens_loja}>349 itens</span>
-                                </li>
-                                <li>
-                                    Colaborador teste <span className={styles.itens_loja}>349 itens</span>
-                                </li>
-                                <li>
-                                    Colaborador teste <span className={styles.itens_loja}>349 itens</span>
-                                </li>
+                                    <li>
+                                        00000 - Colaborador teste <span className={styles.itens_loja}>349 itens</span>
+                                    </li>
+                                    <li>
+                                        00000 - Colaborador teste <span className={styles.itens_loja}>349 itens</span>
+                                    </li>
+                                    <li>
+                                        00000 - Colaborador teste <span className={styles.itens_loja}>349 itens</span>
+                                    </li>
+                                    <li>
+                                        00000 - Colaborador teste <span className={styles.itens_loja}>349 itens</span>
+                                    </li>
                                 </>
                             )}
                         </ol>
@@ -44,9 +44,20 @@ function Dashboard() {
                         </h3>
                         <ol>
                             {data && (
-                                <li>
-                                    Colaborador teste <span className={styles.itens_ext}>349 itens</span>
-                                </li>
+                                <>
+                                    <li>
+                                        00000 - Colaborador teste <span className={styles.itens_ext}>349 itens</span>
+                                    </li>
+                                    <li>
+                                        00000 - Colaborador teste <span className={styles.itens_ext}>349 itens</span>
+                                    </li>
+                                    <li>
+                                        00000 - Colaborador teste <span className={styles.itens_ext}>349 itens</span>
+                                    </li>
+                                    <li>
+                                        00000 - Colaborador teste <span className={styles.itens_ext}>349 itens</span>
+                                    </li>
+                                </>
                             )}
                         </ol>
                     </div>
