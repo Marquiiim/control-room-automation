@@ -21,9 +21,13 @@ function Dashboard() {
                         </h3>
                         <ol>
                             {data && (
-                                <li>
-                                    Colaborador teste <span className={styles.itens_loja}>349 itens</span>
-                                </li>
+                                data.map(user => (
+                                    <li key={user.id}>
+                                        {user.USUARIO}
+                                        <span className={styles.itens_loja}>{user.QTDE_ITENS} itens</span>
+                                    </li>
+                                )
+                                )
                             )}
                         </ol>
                     </div>
