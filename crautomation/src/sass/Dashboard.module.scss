@@ -1,0 +1,145 @@
+$red-primary: #dc3545;
+$blue-primary: #007bff;
+$gray-light: #f8f9fa;
+$gray-medium: #e9ecef;
+$gray-dark: #495057;
+$text-dark: #2c3e50;
+
+@mixin card-style {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e1e5e9;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@mixin list-item-style {
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.75rem;
+    background: $gray-light;
+    border-radius: 8px;
+    border-left: 4px solid;
+    font-weight: 500;
+    color: $gray-dark;
+    transition: all 0.3s ease;
+}
+
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    .content {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .title {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+            text-transform: uppercase;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100px;
+                height: 4px;
+                background: linear-gradient(90deg, #dc3545, #007bff);
+                border-radius: 2px;
+            }
+        }
+
+        .sep_dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+
+            .sep_loja,
+            .sep_ext {
+                background: white;
+                border-radius: 15px;
+                padding: 2rem;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                border: 1px solid #e1e5e9;
+
+                h3 {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    margin-bottom: 1.5rem;
+                    padding-bottom: 0.75rem;
+                    border-bottom: 2px solid;
+                    text-transform: uppercase;
+                }
+
+                ol {
+
+                    li {
+                        padding: 1rem;
+                        margin-bottom: 0.75rem;
+                        background: #f8f9fa;
+                        border-radius: 8px;
+                        border-left: 4px solid;
+                        font-weight: 500;
+                        color: #495057;
+
+                        .itens_loja {
+                            padding: .5rem;
+                            border-radius: .8rem;
+                            background-color: $red-primary;
+                            color: white;
+                            margin-left: 15rem;
+                            text-transform: uppercase;
+                            font-weight: bold;
+                        }
+
+                        .itens_ext {
+                            padding: .5rem;
+                            border-radius: .8rem;
+                            background-color: $blue-primary;
+                            color: white;
+                            margin-left: 15rem;
+                            text-transform: uppercase;
+                            font-weight: bold;
+                        }
+
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            .sep_loja {
+                h3 {
+                    color: $red-primary;
+                    border-bottom-color: $red-primary;
+                }
+
+                li {
+                    border-left-color: $red-primary;
+                }
+            }
+
+            .sep_ext {
+                h3 {
+                    color: $blue-primary;
+                    border-bottom-color: $blue-primary;
+                }
+
+                li {
+                    border-left-color: #007bff;
+                }
+            }
+        }
+    }
+}

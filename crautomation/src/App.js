@@ -1,8 +1,12 @@
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import axios from 'axios'
 import styles from './sass/App.module.css'
 import Mateus from './images/grupo-mateus.svg'
 
 function App() {
+
+  const [dataResponse, setDataResponse] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -21,14 +25,15 @@ function App() {
         }
       }
       )
+      setDataResponse(response.data)
 
-      console.log(response.data)
+      return response.data
 
     } catch (error) {
       console.error(`[SISTEMA] Erro ao enviar o relatório:, ${error}`)
       alert(`[SISTEMA] Erro ao processar o arquivo ${error.message}`)
     }
-  } 
+  }
 
   return (
     <section className={styles.container}>
@@ -74,9 +79,11 @@ function App() {
           >
             Enviar relatório
           </button>
-          <button className={styles.view_dashboard}>
+          <Link to='/dashboard'
+            state={{ data: dataResponse }}
+            className={styles.view_dashboard}>
             Dashboard
-          </button>
+          </Link>
         </form>
       </div>
     </section>
