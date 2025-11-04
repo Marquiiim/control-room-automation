@@ -148,7 +148,6 @@
 }
 .container .content form .view_dashboard {
   background: #10b981;
-  color: #ffffff;
   border: none;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -158,6 +157,7 @@
   transition: all 0.2s ease;
   margin-top: 0.5rem;
   text-align: center;
+  color: #ffffff;
   text-decoration: none;
 }
 .container .content form .view_dashboard:hover {

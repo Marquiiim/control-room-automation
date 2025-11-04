@@ -179,7 +179,6 @@ $transition: all 0.2s ease;
 
             .view_dashboard {
                 background: $green-500;
-                color: $white;
                 border: none;
                 border-radius: $border-radius;
                 padding: 1rem 2rem;
@@ -189,6 +188,7 @@ $transition: all 0.2s ease;
                 transition: $transition;
                 margin-top: 0.5rem;
                 text-align: center;
+                color: $white;
                 text-decoration: none;
 
                 &:hover {
