@@ -26,8 +26,9 @@ function App() {
       }
       )
       setDataResponse(response.data)
-
+      alert('[SISTEMA] Relatório enviado com sucesso, acesse a opção de dashboard para apresentação de dados.')
       return response.data
+
 
     } catch (error) {
       console.error(`[SISTEMA] Erro ao enviar o relatório:, ${error}`)

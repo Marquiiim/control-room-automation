@@ -25,19 +25,18 @@ const columns = [
 app.post('/datareading', upload.single('archive'), async (req, res) => {
     try {
         const { author } = req.body
+        const reportDate = new Date().toLocaleString('pt-BR')
 
         const workbook = XLSX.readFile(req.file.path)
         const firstSheetName = workbook.SheetNames[0]
         const worksheet = workbook.Sheets[firstSheetName]
-
         const data = XLSX.utils.sheet_to_json(worksheet)
-
         const result = filterData(data, columns)
-
         const log = await registerLog(author, req.file.originalname)
 
         res.status(200).json({
             success: true,
+            timestamp: reportDate,
             message: '[SISTEMA] Consulta de dados concluída com sucesso.',
             author: author,
             log: log,

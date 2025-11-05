@@ -44,7 +44,6 @@ $text-dark: #2c3e50;
             font-size: 2rem;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 0.75rem;
             text-transform: uppercase;
@@ -63,6 +62,30 @@ $text-dark: #2c3e50;
             }
         }
 
+        .subtitle_date {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-transform: uppercase;
+            flex-shrink: 0;
+            font-weight: bold;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 2px;
+                background: linear-gradient(90deg, #dc3545, #007bff);
+                border-radius: 2px;
+                opacity: 0.7;
+            }
+        }
+
         .others {
             @include card-style;
             display: flex;
@@ -70,11 +93,17 @@ $text-dark: #2c3e50;
             align-items: center;
 
             &>div {
-                background-color: #004793;
+                background: linear-gradient(135deg, #004793 0%, #0066cc 100%);
                 color: white;
                 font-weight: bold;
-                padding: 1rem;
-                border-radius: 8px;
+                padding: 1.25rem 2rem;
+                border-radius: 12px;
+                text-align: center;
+                min-width: 120px;
+                box-shadow: 0 4px 15px rgba(0, 71, 147, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                position: relative;
+                overflow: hidden;
             }
         }
 

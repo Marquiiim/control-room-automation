@@ -14,6 +14,9 @@ function Dashboard() {
                 <h2 className={styles.title}>
                     Produtividade separação
                 </h2>
+                <h3 className={styles.subtitle_date}>
+                    {data.timestamp || '00/00/0000, 00:00:00'}
+                </h3>
                 <div className={styles.others}>
                     <div>
                         Itens: {filterData.reduce((total, item) => {
@@ -37,14 +40,22 @@ function Dashboard() {
                             Separação Loja
                         </h3>
                         <ol>
-                            {data && Object.entries(data)
-                                .filter(([key, value]) => value.TIPO && value.TIPO.startsWith('1 - Separador Loja'))
-                                .sort((A, B) => Number(B.QTDE_ITENS) - Number(A.QTDE_ITENS)
+                            {data && Object.keys(data).length > 0 && Object.entries(data)
+                                .filter(([key, value]) =>
+                                    value &&
+                                    value.TIPO &&
+                                    value.TIPO.startsWith('1 - Separador Loja')
+                                )
+                                .sort((A, B) =>
+                                    Number(B[1]?.QTDE_ITENS || 0) - Number(A[1]?.QTDE_ITENS || 0)
                                 )
                                 .map(([index, value]) =>
                                 (
                                     <li key={index}>
-                                        {value.USUARIO} <span className={styles.itens_loja}>{value.QTDE_ITENS}</span>
+                                        {value?.USUARIO || 'N/A'}
+                                        <span className={styles.itens_loja}>
+                                            {value?.QTDE_ITENS || 0}
+                                        </span>
                                     </li>
                                 ))}
                         </ol>
@@ -54,14 +65,21 @@ function Dashboard() {
                             Separação Externa
                         </h3>
                         <ol>
-                            {data && Object.entries(data)
-                                .filter(([key, value]) => value.TIPO && value.TIPO.startsWith('2 - Separador Externa'))
-                                .sort(([keyA, valueA], [keyB, valueB]) => {
-                                    return Number(valueB.QTDE_ITENS) - Number(valueA.QTDE_ITENS)
-                                })
+                            {data && Object.keys(data).length > 0 && Object.entries(data)
+                                .filter(([key, value]) =>
+                                    value &&
+                                    value.TIPO &&
+                                    value.TIPO.startsWith('2 - Separador Externa')
+                                )
+                                .sort((A, B) =>
+                                    Number(B[1]?.QTDE_ITENS || 0) - Number(A[1]?.QTDE_ITENS || 0)
+                                )
                                 .map(([key, value]) => (
                                     <li key={key}>
-                                        {value.USUARIO} <span className={styles.itens_ext}>{value.QTDE_ITENS}</span>
+                                        {value?.USUARIO || 'N/A'}
+                                        <span className={styles.itens_ext}>
+                                            {value?.QTDE_ITENS || 0}
+                                        </span>
                                     </li>
                                 ))}
                         </ol>
