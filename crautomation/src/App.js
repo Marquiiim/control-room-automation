@@ -25,14 +25,18 @@ function App() {
         }
       }
       )
-      setDataResponse(response.data)
-      alert('[SISTEMA] Relatório enviado com sucesso, acesse a opção de dashboard para apresentação de dados.')
-      return response.data
 
+      if (response?.data) {
+        setDataResponse(response.data)
+
+        alert('[SISTEMA] Relatório enviado com sucesso, acesse a opção de dashboard para apresentação de dados.')
+
+        return response.data
+      }
 
     } catch (error) {
       console.error(`[SISTEMA] Erro ao enviar o relatório:, ${error}`)
-      alert(`[SISTEMA] Erro ao processar o arquivo ${error.message}`)
+      alert(`[SISTEMA] Erro ao processar o arquivo: "${error.message}", leia as regras e tente novamente.`)
     }
   }
 
