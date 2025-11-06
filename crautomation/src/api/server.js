@@ -22,7 +22,18 @@ const columns = [
     'TIPO'
 ]
 
+async function clearUploads() {
+    const uploadsDir = 'uploads/'
+
+    const files = await fs.readdir(uploadsDir)
+
+    for (const file of files) {
+        await fs.unlink(path.join(uploadsDir, file))
+    }
+}
+
 app.post('/datareading', upload.single('archive'), async (req, res) => {
+
     try {
         const { author } = req.body
         const reportDate = new Date().toLocaleString('pt-BR')
@@ -32,6 +43,9 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
         const worksheet = workbook.Sheets[firstSheetName]
         const data = XLSX.utils.sheet_to_json(worksheet)
         const result = filterData(data, columns)
+
+        await clearUploads()
+
         const log = await registerLog(author, req.file.originalname)
 
         res.status(200).json({
@@ -98,7 +112,7 @@ async function registerLog(author, archiveName) {
         const dataLog = {
             author: author,
             archive: archiveName,
-            reason: error,
+            reason: error.message,
             timestamp: new Date().toLocaleString('pt-BR')
         }
 
