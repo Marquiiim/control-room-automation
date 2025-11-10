@@ -145,25 +145,4 @@
 .container .content form .report_submission:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-.container .content form .view_dashboard {
-  background: #10b981;
-  border: none;
-  border-radius: 8px;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 0.5rem;
-  text-align: center;
-  color: #ffffff;
-  text-decoration: none;
-}
-.container .content form .view_dashboard:hover {
-  background: #059669;
-}
-.container .content form .view_dashboard:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
 }/*# sourceMappingURL=App.module.css.map */

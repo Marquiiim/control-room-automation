@@ -1,12 +1,10 @@
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import styles from './sass/App.module.css'
 import Mateus from './images/grupo-mateus.svg'
 
 function App() {
-
-  const [dataResponse, setDataResponse] = useState(null)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,16 +25,15 @@ function App() {
       )
 
       if (response?.data) {
-        setDataResponse(response.data)
-
-        alert('[SISTEMA] Relatório enviado com sucesso, acesse a opção de dashboard para apresentação de dados.')
-
-        return response.data
+        navigate('/dashboard', {
+          state: { data: response.data }
+        })
       }
 
     } catch (error) {
-      console.error(`[SISTEMA] Erro ao enviar o relatório:, ${error}`)
-      alert(`[SISTEMA] Erro ao processar o arquivo: "${error.message}", leia as regras e tente novamente.`)
+      const errorMessage = error.response?.data?.error || error.message
+
+      alert(`${errorMessage}", leia as regras e tente novamente.`)
     }
   }
 
@@ -54,13 +51,10 @@ function App() {
         </div>
         <ul className={styles.system_rules}>
           <li>
-            Apenas transfira o arquivo para a caixa abaixo e envie o relatório, logo após você poderá acessar a dashboard com as informações atualizadas.
+            Selecione um arquivo nos formatos: .xlsx, .xls ou .csv - formatos compatíveis com Excel
           </li>
           <li>
-            Confira se o arquivo está no formato .xlsx/.xls/.csv.
-          </li>
-          <li>
-            Confira o arquivo antes de enviar.
+            Verifique se o arquivo contém dados - arquivos vazios não podem ser processados.
           </li>
         </ul>
         <form onSubmit={handleSubmit}>
@@ -79,16 +73,9 @@ function App() {
             >
             </input>
           </div>
-          <button type='submit'
-            className={styles.report_submission}
-          >
-            Enviar relatório
+          <button type='submit' className={styles.report_submission}>
+            Montar Dashboard
           </button>
-          <Link to='/dashboard'
-            state={{ data: dataResponse }}
-            className={styles.view_dashboard}>
-            Dashboard
-          </Link>
         </form>
       </div>
     </section>

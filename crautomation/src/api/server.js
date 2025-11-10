@@ -23,19 +23,33 @@ const columns = [
 ]
 
 async function clearUploads() {
-    const uploadsDir = 'uploads/'
+    try {
+        const uploadsDir = 'uploads/'
+        const files = await fs.readdir(uploadsDir)
 
-    const files = await fs.readdir(uploadsDir)
-
-    for (const file of files) {
-        await fs.unlink(path.join(uploadsDir, file))
+        await Promise.all(
+            files.map(file => fs.unlink(path.join(uploadsDir, file)))
+        )
+    } catch (error) {
+        console.log(`[SISTEMA] Erro ao limpar cache de uploads: ${error.message}`)
     }
 }
 
 app.post('/datareading', upload.single('archive'), async (req, res) => {
 
+    let author
+
     try {
-        const { author } = req.body
+
+        if (!req.file) {
+            throw new Error('Nenhum arquivo enviado.')
+        }
+
+        if (!req.body.author) {
+            throw new Error('Autor não informado')
+        }
+
+        author = req.body.author
         const reportDate = new Date().toLocaleString('pt-BR')
 
         const workbook = XLSX.readFile(req.file.path)
@@ -46,7 +60,11 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
 
         await clearUploads()
 
-        const log = await registerLog(author, req.file.originalname)
+        const log = await registerLog(
+            author,
+            req.file.originalname,
+            'success'
+        )
 
         res.status(200).json({
             success: true,
@@ -58,10 +76,17 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
         })
 
     } catch (error) {
-        console.error(`[SISTEMA] Erro ao processar dados: ${error}`)
+        const log = await registerLog(
+            author || req.body?.author,
+            req.file?.originalname,
+            'error',
+            error.message
+        )
+
         res.status(500).json({
             success: false,
-            error: `[SISTEMA] Erro ao processar arquivo: ${error.message}`
+            error: error.message,
+            log: log
         })
     }
 })
@@ -93,39 +118,31 @@ function filterData(data, columns) {
     return filteredData
 }
 
-async function registerLog(author, archiveName) {
-    try {
-        const dataLog = {
-            author: author,
-            archive: archiveName,
-            timestamp: new Date().toLocaleString('pt-BR')
-        }
+async function registerLog(author, archiveName, status, errorReason = null) {
 
+    const dataLog = {
+        status: status,
+        author: author,
+        archive: archiveName,
+        timestamp: new Date().toLocaleString('pt-BR')
+    }
+
+    if (status === 'error' && errorReason) {
+        dataLog.reason = errorReason
+    }
+
+    try {
         const dataNow = await fs.readFile(logPath, 'utf8')
         const jsonData = JSON.parse(dataNow)
-
         jsonData.push(dataLog)
-
         await fs.writeFile(logPath, JSON.stringify(jsonData, null, 2))
 
     } catch (error) {
-        const dataLog = {
-            author: author,
-            archive: archiveName,
-            reason: error.message,
-            timestamp: new Date().toLocaleString('pt-BR')
-        }
-
-        const dataNow = await fs.readFile(logPath, 'utf8')
-        const jsonData = JSON.parse(dataNow)
-
-        jsonData.push(dataLog)
-
-        await fs.writeFile(logPath, JSON.stringify(jsonData, null, 2))
-
         console.log(`[SISTEMA] Erro ao registrar os logs: ${error}`)
     }
+    return dataLog
 }
+
 
 app.listen(PORT, () => {
     console.log(`[SERVIDOR] Servidor rodando na porta ${PORT}`)

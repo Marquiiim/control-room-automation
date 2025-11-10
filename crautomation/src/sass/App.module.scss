@@ -176,30 +176,6 @@ $transition: all 0.2s ease;
                     box-shadow: 0 0 0 3px rgba($blue-500, 0.2);
                 }
             }
-
-            .view_dashboard {
-                background: $green-500;
-                border: none;
-                border-radius: $border-radius;
-                padding: 1rem 2rem;
-                font-size: 1rem;
-                font-weight: 500;
-                cursor: pointer;
-                transition: $transition;
-                margin-top: 0.5rem;
-                text-align: center;
-                color: $white;
-                text-decoration: none;
-
-                &:hover {
-                    background: $green-600;
-                }
-
-                &:focus {
-                    outline: none;
-                    box-shadow: 0 0 0 3px rgba($green-500, 0.2);
-                }
-            }
         }
     }
 }
