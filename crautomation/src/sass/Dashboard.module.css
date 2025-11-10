@@ -1,36 +1,47 @@
 .card-base, .container .content .sep_dashboard .sep_loja,
 .container .content .sep_dashboard .sep_ext, .container .content .others, .container .content .subtitle_date {
-  background: white;
-  border-radius: 15px;
+  background: #ffffff;
+  border-radius: 0.9375rem;
   padding: 1.5rem;
   border: 1px solid #e1e5e9;
+  box-shadow: 0 0.25rem 0.5rem rgba(73, 80, 87, 0.1);
 }
 
 .gradient-blue, .container .content .others > div, .container .content .subtitle_date {
-  background: linear-gradient(135deg, #004793 0%, #0066cc 100%);
-  color: white;
+  background: linear-gradient(135deg, #002B7F 0%, #0043A8 100%);
+  color: #ffffff;
+  font-weight: bold;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.gradient-red {
+  background: linear-gradient(135deg, #E00000 0%, #A80000 100%);
+  color: #ffffff;
   font-weight: bold;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   padding: 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
   overflow: hidden;
+  background-image: url("../images/slide-grupo-mateus.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .container .content {
-  max-width: 1500px;
+  max-width: 96.875rem;
   margin: 0 auto;
   height: calc(100vh - 2rem);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.425rem;
 }
 .container .content .title {
-  color: #2c3e50;
+  color: #ffffff;
   font-size: 2.5rem;
   font-weight: 800;
   text-align: center;
@@ -38,13 +49,8 @@
   padding: 0.5rem;
   text-transform: uppercase;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   margin-bottom: 0.5rem;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.09375rem;
 }
 .container .content .title::after {
   content: "";
@@ -52,32 +58,34 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, #dc3545, #007bff);
-  border-radius: 2px;
+  width: 5rem;
+  height: 0.1875rem;
+  background: linear-gradient(90deg, #E00000, #A80000);
+  border-radius: 0.125rem;
 }
 .container .content .subtitle_date {
   font-size: 1.75rem;
   flex-shrink: 0;
-  letter-spacing: 1px;
+  letter-spacing: 0.0625rem;
   padding: 1.25rem 2rem;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   text-align: center;
   text-transform: uppercase;
-  min-width: 120px;
+  min-width: 7.5rem;
 }
 .container .content .others {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  gap: 10rem;
 }
 .container .content .others > div {
   padding: 1.25rem 2rem;
-  border-radius: 12px;
+  border-radius: 0.75rem;
+  font-size: 1.3rem;
   text-align: center;
   text-transform: uppercase;
-  min-width: 120px;
+  min-width: 7.5rem;
   position: relative;
   overflow: hidden;
 }
@@ -107,7 +115,7 @@
 }
 .container .content .sep_dashboard .sep_loja h3,
 .container .content .sep_dashboard .sep_ext h3 {
-  font-size: 1.25rem;
+  font-size: 1.7rem;
   font-weight: 600;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
@@ -132,7 +140,7 @@
   border-left: 4px solid;
   font-weight: 500;
   color: #495057;
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 .container .content .sep_dashboard .sep_loja ol li .itens_loja,
 .container .content .sep_dashboard .sep_loja ol li .itens_ext,
@@ -140,31 +148,31 @@
 .container .content .sep_dashboard .sep_ext ol li .itens_ext {
   padding: 0.4rem 0.7rem;
   border-radius: 0.6rem;
-  color: white;
+  color: #ffffff;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 500;
   white-space: nowrap;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 .container .content .sep_dashboard .sep_loja ol li .itens_loja,
 .container .content .sep_dashboard .sep_ext ol li .itens_loja {
-  background-color: #dc3545;
+  background-color: #E00000;
 }
 .container .content .sep_dashboard .sep_loja ol li .itens_ext,
 .container .content .sep_dashboard .sep_ext ol li .itens_ext {
-  background-color: #007bff;
+  background-color: #002B7F;
 }
 .container .content .sep_dashboard .sep_loja h3 {
-  color: #dc3545;
-  border-bottom-color: #dc3545;
+  color: #E00000;
+  border-bottom-color: #E00000;
 }
 .container .content .sep_dashboard .sep_loja li {
-  border-left-color: #dc3545;
+  border-left-color: #E00000;
 }
 .container .content .sep_dashboard .sep_ext h3 {
-  color: #007bff;
-  border-bottom-color: #007bff;
+  color: #002B7F;
+  border-bottom-color: #002B7F;
 }
 .container .content .sep_dashboard .sep_ext li {
-  border-left-color: #007bff;
+  border-left-color: #002B7F;
 }/*# sourceMappingURL=Dashboard.module.css.map */

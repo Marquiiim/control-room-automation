@@ -1,53 +1,67 @@
-$red-primary: #dc3545;
-$blue-primary: #007bff;
+$red-primary: #E00000;
+$red-secondary: #A80000;
+$blue-primary: #002B7F;
+$blue-secondary: #0043A8;
+$blue-tertiary: #0D56C0;
 $gray-dark: #495057;
+$gray-light: #f8f9fa;
+$gray-border: #e1e5e9;
+$white: #ffffff;
 
 .card-base {
-    background: white;
-    border-radius: 15px;
+    background: $white;
+    border-radius: 0.9375rem;
     padding: 1.5rem;
-    border: 1px solid #e1e5e9;
+    border: 1px solid $gray-border;
+    box-shadow: 0 0.25rem 0.5rem rgba($gray-dark, 0.1);
 }
 
 .gradient-blue {
-    background: linear-gradient(135deg, #004793 0%, #0066cc 100%);
-    color: white;
+    background: linear-gradient(135deg, $blue-primary 0%, $blue-secondary 100%);
+    color: $white;
     font-weight: bold;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba($white, 0.2);
 }
+
+.gradient-red {
+    background: linear-gradient(135deg, $red-primary 0%, $red-secondary 100%);
+    color: $white;
+    font-weight: bold;
+    border: 1px solid rgba($white, 0.2);
+}
+
+
 
 .container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 1rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
     overflow: hidden;
+    background-image: url('../images/slide-grupo-mateus.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
     .content {
-        max-width: 1500px;
+        max-width: 96.875rem;
         margin: 0 auto;
         height: calc(100vh - 2rem);
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 0.4250rem;
 
         .title {
-            color: #2c3e50;
+            color: $white;
             font-size: 2.5rem;
             font-weight: 800;
             text-align: center;
             position: relative;
-            padding: .5rem;
+            padding: 0.5rem;
             text-transform: uppercase;
             flex-shrink: 0;
-            background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             margin-bottom: 0.5rem;
-            letter-spacing: 1.5px;
+            letter-spacing: 0.09375rem;
 
             &::after {
                 content: '';
@@ -55,10 +69,10 @@ $gray-dark: #495057;
                 bottom: 0;
                 left: 50%;
                 transform: translateX(-50%);
-                width: 80px;
-                height: 3px;
-                background: linear-gradient(90deg, #dc3545, #007bff);
-                border-radius: 2px;
+                width: 5rem;
+                height: 0.1875rem;
+                background: linear-gradient(90deg, $red-primary, $red-secondary);
+                border-radius: 0.125rem;
             }
         }
 
@@ -67,27 +81,29 @@ $gray-dark: #495057;
             @extend .gradient-blue;
             font-size: 1.75rem;
             flex-shrink: 0;
-            letter-spacing: 1px;
+            letter-spacing: 0.0625rem;
             padding: 1.25rem 2rem;
-            border-radius: 12px;
+            border-radius: 0.75rem;
             text-align: center;
             text-transform: uppercase;
-            min-width: 120px;
+            min-width: 7.5rem;
         }
 
         .others {
             @extend .card-base;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
+            gap: 10rem;
 
             &>div {
                 @extend .gradient-blue;
                 padding: 1.25rem 2rem;
-                border-radius: 12px;
+                border-radius: 0.75rem;
+                font-size: 1.3rem;
                 text-align: center;
                 text-transform: uppercase;
-                min-width: 120px;
+                min-width: 7.5rem;
                 position: relative;
                 overflow: hidden;
 
@@ -98,7 +114,7 @@ $gray-dark: #495057;
                     left: 0;
                     right: 0;
                     height: 2px;
-                    background: linear-gradient(90deg, transparent, #ffffff, transparent);
+                    background: linear-gradient(90deg, transparent, $white, transparent);
                 }
             }
         }
@@ -120,7 +136,7 @@ $gray-dark: #495057;
                 overflow: hidden;
 
                 h3 {
-                    font-size: 1.25rem;
+                    font-size: 1.7rem;
                     font-weight: 600;
                     margin-bottom: 1rem;
                     padding-bottom: 0.5rem;
@@ -140,21 +156,21 @@ $gray-dark: #495057;
                         align-items: center;
                         padding: 0.5rem;
                         margin-bottom: 0.5rem;
-                        background: #f8f9fa;
+                        background: $gray-light;
                         border-left: 4px solid;
                         font-weight: 500;
-                        color: #495057;
-                        font-size: 1rem;
+                        color: $gray-dark;
+                        font-size: 1.4rem;
 
                         .itens_loja,
                         .itens_ext {
                             padding: 0.4rem 0.7rem;
                             border-radius: 0.6rem;
-                            color: white;
+                            color: $white;
                             text-transform: uppercase;
-                            font-weight: bold;
+                            font-weight: 500;
                             white-space: nowrap;
-                            font-size: 0.9rem;
+                            font-size: 1.2rem;
                         }
 
                         .itens_loja {

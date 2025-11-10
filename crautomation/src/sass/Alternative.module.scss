@@ -1,193 +1,177 @@
-$red-primary: #dc3545;
-$blue-primary: #007bff;
+$red-primary: #E00000;
+$red-secondary: #A80000;
+$blue-primary: #002B7F;
+$blue-secondary: #0043A8;
+$blue-tertiary: #0D56C0;
 $gray-dark: #495057;
+$gray-light: #f8f9fa;
+$gray-border: #e1e5e9;
+$white: #ffffff;
 
 .card-base {
-    background: white;
-    border-radius: 15px;
-    padding: 1.5rem;
-    border: 1px solid #e1e5e9;
+    background: $white;
+    border-radius: 0.9375rem;
+    padding: 1rem;
+    border: 1px solid $gray-border;
 }
 
-.gradient-blue {
-    background: linear-gradient(135deg, #004793 0%, #0066cc 100%);
-    color: white;
+.blue {
+    background-color: $blue-primary;
+    color: $white;
     font-weight: bold;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.red {
+    background-color: $red-primary;
+    color: $white;
+    font-weight: bold;
 }
 
 .container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 1rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
-    overflow: hidden;
+    background-color: $gray-border;
 
     .content {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
         height: calc(100vh - 2rem);
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 0.4250rem;
+    }
+
+    .titles_page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .title {
-            color: #2c3e50;
+            @extend .card-base;
+            @extend .blue;
             font-size: 2.5rem;
             font-weight: 800;
             text-align: center;
-            position: relative;
-            padding: .5rem;
+            padding: 0.5rem 3rem;
             text-transform: uppercase;
-            flex-shrink: 0;
-            background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             margin-bottom: 0.5rem;
-            letter-spacing: 1.5px;
-
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 80px;
-                height: 3px;
-                background: linear-gradient(90deg, #dc3545, #007bff);
-                border-radius: 2px;
-            }
         }
 
         .subtitle_date {
-            @extend .card-base;
-            @extend .gradient-blue;
             font-size: 1.75rem;
-            flex-shrink: 0;
-            letter-spacing: 1px;
             padding: 1.25rem 2rem;
-            border-radius: 12px;
+            border-radius: 0.75rem;
             text-align: center;
             text-transform: uppercase;
-            min-width: 120px;
+            min-width: 7.5rem;
+            color: $red-primary;
         }
+    }
 
-        .others {
-            @extend .card-base;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+    .others {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
 
-            &>div {
-                @extend .gradient-blue;
-                padding: 1.25rem 2rem;
-                border-radius: 12px;
-                text-align: center;
-                text-transform: uppercase;
-                min-width: 120px;
-                position: relative;
-                overflow: hidden;
+        &>div {
+            @extend .blue;
+            padding: 1.5rem;
+            max-width: 300px;
+            border-radius: 0.75rem;
+            font-size: 1.3rem;
+            text-align: center;
+            text-transform: uppercase;
 
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    height: 2px;
-                    background: linear-gradient(90deg, transparent, #ffffff, transparent);
-                }
+            &:nth-child(1) {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            &:nth-child(2) {
+                grid-column: 2;
+                grid-row: 1;
+            }
+
+            &:nth-child(3) {
+                grid-column: 1 / span 2;
+                grid-row: 2;
+                justify-self: center;
+                width: 50%;
+                margin-top: 0.5rem;
             }
         }
+    }
 
-        .sep_dashboard {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            flex: 1;
-            min-height: 0;
+    .sep_dashboard {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+
+        .sep_loja,
+        .sep_ext {
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
 
-            .sep_loja,
-            .sep_ext {
+            h3 {
                 @extend .card-base;
-                padding: 1.5rem;
-                display: flex;
-                flex-direction: column;
-                overflow: hidden;
+                font-size: 1.2rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                flex-shrink: 0;
+            }
 
-                h3 {
-                    font-size: 1.25rem;
-                    font-weight: 600;
-                    margin-bottom: 1rem;
-                    padding-bottom: 0.5rem;
-                    border-bottom: 2px solid;
-                    text-transform: uppercase;
-                    flex-shrink: 0;
-                }
+            ol {
+                flex: 1;
+                overflow-y: auto;
+                list-style: none;
+                padding: 0;
+                margin: 0;
 
-                ol {
-                    flex: 1;
-                    overflow-y: auto;
-                    list-style: none;
+                .user {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    width: 100%;
+                    margin-bottom: 0.2rem;
 
                     li {
+                        @extend .card-base;
                         display: flex;
-                        justify-content: space-between;
                         align-items: center;
-                        padding: 0.5rem;
-                        margin-bottom: 0.5rem;
-                        background: #f8f9fa;
-                        border-left: 4px solid;
                         font-weight: 500;
-                        color: #495057;
+                        color: $gray-dark;
                         font-size: 1rem;
+                        flex: 1;
+                        min-width: 0;
+                        margin: 0;
+                    }
 
-                        .itens_loja,
-                        .itens_ext {
-                            padding: 0.4rem 0.7rem;
-                            border-radius: 0.6rem;
-                            color: white;
-                            text-transform: uppercase;
-                            font-weight: bold;
-                            white-space: nowrap;
-                            font-size: 0.9rem;
-                        }
-
-                        .itens_loja {
-                            background-color: $red-primary;
-                        }
-
-                        .itens_ext {
-                            background-color: $blue-primary;
-                        }
+                    .itens_loja,
+                    .itens_ext {
+                        @extend .card-base;
+                        color: $red-primary;
+                        font-weight: bold;
+                        flex-shrink: 0;
                     }
                 }
             }
+        }
 
-            .sep_loja {
-                h3 {
-                    color: $red-primary;
-                    border-bottom-color: $red-primary;
-                }
-
-                li {
-                    border-left-color: $red-primary;
-                }
+        .sep_loja {
+            h3 {
+                color: $blue-primary;
             }
+        }
 
-            .sep_ext {
-                h3 {
-                    color: $blue-primary;
-                    border-bottom-color: $blue-primary;
-                }
-
-                li {
-                    border-left-color: $blue-primary;
-                }
+        .sep_ext {
+            h3 {
+                color: $blue-primary;
             }
         }
     }

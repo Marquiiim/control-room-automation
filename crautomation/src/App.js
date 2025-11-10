@@ -85,7 +85,7 @@ function App() {
               className={styles.view_dashboard}
               onClick={(e) => {
                 e.preventDefault()
-                window.open('/dashboard')
+                window.open('/dashboardalternative')
               }}>
               Abrir Dashboard
             </button>
