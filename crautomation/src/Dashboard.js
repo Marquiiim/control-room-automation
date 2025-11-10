@@ -1,12 +1,19 @@
 import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import styles from './sass/Dashboard.module.css'
 
 function Dashboard() {
 
     const location = useLocation()
-    const data = location.state.data
+    const [data, setData] = useState(null)
 
-    const filterData = Object.values(data).filter(item => item.TIPO !== "TOTAL")
+    useEffect(() => {
+        if (location.state?.data) {
+            setData(location.state.data)
+        }
+    }, [location.state])
+
+    const filterData = data ? Object.values(data).filter(item => item.TIPO !== "TOTAL") : []
 
     return (
         <section className={styles.container}>
@@ -15,7 +22,7 @@ function Dashboard() {
                     Produtividade separação
                 </h2>
                 <h3 className={styles.subtitle_date}>
-                    {data.timestamp || '00/00/0000, 00:00:00'}
+                    {data?.timestamp || '00/00/0000, 00:00:00'}
                 </h3>
                 <div className={styles.others}>
                     <div>
@@ -40,7 +47,7 @@ function Dashboard() {
                             Separação Loja
                         </h3>
                         <ol>
-                            {data && Object.keys(data).length > 0 && Object.entries(data)
+                            {data && Object.entries(data)
                                 .filter(([key, value]) =>
                                     value &&
                                     value.TIPO &&
@@ -65,7 +72,7 @@ function Dashboard() {
                             Separação Externa
                         </h3>
                         <ol>
-                            {data && Object.keys(data).length > 0 && Object.entries(data)
+                            {data && Object.entries(data)
                                 .filter(([key, value]) =>
                                     value &&
                                     value.TIPO &&

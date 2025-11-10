@@ -40,14 +40,8 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
     let author
 
     try {
-
-        if (!req.file) {
-            throw new Error('Nenhum arquivo enviado.')
-        }
-
-        if (!req.body.author) {
-            throw new Error('Autor não informado')
-        }
+        if (!req.file) throw new Error('Nenhum arquivo enviado.')
+        if (!req.body.author) throw new Error('Autor não informado')
 
         author = req.body.author
         const reportDate = new Date().toLocaleString('pt-BR')
@@ -142,7 +136,6 @@ async function registerLog(author, archiveName, status, errorReason = null) {
     }
     return dataLog
 }
-
 
 app.listen(PORT, () => {
     console.log(`[SERVIDOR] Servidor rodando na porta ${PORT}`)
