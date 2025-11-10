@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import axios from 'axios'
 import styles from './sass/App.module.css'
 import Mateus from './images/grupo-mateus.svg'
 
 function App() {
-  const navigate = useNavigate()
+  const [openDashboard, setOpenDashboard] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -24,16 +24,19 @@ function App() {
       }
       )
 
-      if (response?.data) {
-        navigate('/dashboard', {
-          state: { data: response.data }
-        })
+      if (response?.data && response?.data.success === true) {
+        localStorage.removeItem('dashboardData')
+        localStorage.setItem('dashboardData', JSON.stringify(response.data))
+
+        alert('[SISTEMA] Dados enviados com sucesso.')
+        setOpenDashboard(true)
       }
 
     } catch (error) {
       const errorMessage = error.response?.data?.error || error.message
-
       alert(`${errorMessage}", leia as regras e tente novamente.`)
+
+      setOpenDashboard(false)
     }
   }
 
@@ -74,8 +77,20 @@ function App() {
             </input>
           </div>
           <button type='submit' className={styles.report_submission}>
-            Montar Dashboard
+            Enviar para Dashboard
           </button>
+
+          {openDashboard &&
+            <button
+              className={styles.view_dashboard}
+              onClick={(e) => {
+                e.preventDefault()
+                window.open('/dashboard')
+              }}>
+              Abrir Dashboard
+            </button>
+          }
+
         </form>
       </div>
     </section>

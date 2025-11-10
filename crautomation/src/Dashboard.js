@@ -1,17 +1,38 @@
-import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import styles from './sass/Dashboard.module.css'
 
 function Dashboard() {
 
-    const location = useLocation()
     const [data, setData] = useState(null)
 
-    useEffect(() => {
-        if (location.state?.data) {
-            setData(location.state.data)
+    const loadData = () => {
+        const savedData = localStorage.getItem('dashboardData')
+
+        if (savedData) {
+            try {
+                const parsedData = JSON.parse(savedData)
+                setData(parsedData)
+            } catch (error) {
+                alert(`[SISTEMA] Erro ao ler dados e atualizar dashboard.`)
+            }
         }
-    }, [location.state])
+    }
+
+    useEffect(() => {
+        loadData()
+
+        const handleStorageChange = (e) => {
+            if (e.key === 'dashboardData') {
+                loadData()
+            }
+        }
+
+        window.addEventListener('storage', handleStorageChange)
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange)
+        }
+    }, [])
 
     const filterData = data ? Object.values(data).filter(item => item.TIPO !== "TOTAL") : []
 
