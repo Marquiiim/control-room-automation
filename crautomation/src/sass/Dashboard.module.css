@@ -22,7 +22,7 @@
   overflow: hidden;
 }
 .container .content {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   height: calc(100vh - 2rem);
   display: flex;
