@@ -3,12 +3,10 @@ import { IoMdTime } from "react-icons/io";
 import styles from './sass/Alternative.module.css'
 
 function Dashboard() {
-
     const [data, setData] = useState(null)
 
     const loadData = () => {
         const savedData = localStorage.getItem('dashboardData')
-
         if (savedData) {
             try {
                 const parsedData = JSON.parse(savedData)
@@ -21,21 +19,28 @@ function Dashboard() {
 
     useEffect(() => {
         loadData()
-
         const handleStorageChange = (e) => {
             if (e.key === 'dashboardData') {
                 loadData()
             }
         }
-
         window.addEventListener('storage', handleStorageChange)
-
         return () => {
             window.removeEventListener('storage', handleStorageChange)
         }
     }, [])
 
     const filterData = data ? Object.values(data).filter(item => item.TIPO !== "TOTAL") : []
+
+    const lojaData = data ? Object.entries(data)
+        .filter(([key, value]) => value && value.TIPO && value.TIPO.startsWith('1 - Separador Loja'))
+        .sort((A, B) => Number(B[1]?.QTDE_ITENS || 0) - Number(A[1]?.QTDE_ITENS || 0))
+        : []
+
+    const extData = data ? Object.entries(data)
+        .filter(([key, value]) => value && value.TIPO && value.TIPO.startsWith('2 - Separador Externa'))
+        .sort((A, B) => Number(B[1]?.QTDE_ITENS || 0) - Number(A[1]?.QTDE_ITENS || 0))
+        : []
 
     return (
         <section className={styles.container}>
@@ -48,75 +53,52 @@ function Dashboard() {
                         Produtividade separação
                     </h2>
                 </div>
+
                 <section className={styles.sep_dashboard}>
                     <div className={styles.sep_loja}>
-                        <h3>
-                            Separação Loja
-                        </h3>
-                        <ol>
-                            {data && Object.entries(data)
-                                .filter(([key, value]) =>
-                                    value &&
-                                    value.TIPO &&
-                                    value.TIPO.startsWith('1 - Separador Loja')
-                                )
-                                .sort((A, B) =>
-                                    Number(B[1]?.QTDE_ITENS || 0) - Number(A[1]?.QTDE_ITENS || 0)
-                                )
-                                .map(([index, value]) =>
-                                (
-                                    <div className={styles.user}>
-                                        <li key={index}>
-                                            {value?.USUARIO || 'N/A'}
-                                        </li>
+                        <h3>Separação Loja</h3>
+                        <div className={styles.list_container}>
+                            <ol>
+                                {lojaData.map(([index, value]) => (
+                                    <div className={styles.user} key={index}>
+                                        <li>{value?.USUARIO || 'N/A'}</li>
                                         <span className={styles.itens_loja}>
                                             {value?.QTDE_ITENS || 0}
                                         </span>
                                     </div>
                                 ))}
-                        </ol>
+                            </ol>
+                        </div>
                     </div>
+
                     <div className={styles.sep_ext}>
-                        <h3>
-                            Separação Externa
-                        </h3>
-                        <ol>
-                            {data && Object.entries(data)
-                                .filter(([key, value]) =>
-                                    value &&
-                                    value.TIPO &&
-                                    value.TIPO.startsWith('2 - Separador Externa')
-                                )
-                                .sort((A, B) =>
-                                    Number(B[1]?.QTDE_ITENS || 0) - Number(A[1]?.QTDE_ITENS || 0)
-                                )
-                                .map(([key, value]) => (
-                                    <div className={styles.user}>
-                                        <li key={key}>
-                                            {value?.USUARIO || 'N/A'}
-                                        </li>
+                        <h3>Separação Externa</h3>
+                        <div className={styles.list_container}>
+                            <ol>
+                                {extData.map(([key, value]) => (
+                                    <div className={styles.user} key={key}>
+                                        <li>{value?.USUARIO || 'N/A'}</li>
                                         <span className={styles.itens_ext}>
                                             {value?.QTDE_ITENS || 0}
                                         </span>
                                     </div>
                                 ))}
-                        </ol>
-                    </div>
-                    <div className={styles.others}>
-                        <div>
-                            Itens: {filterData.reduce((total, item) => {
-                                return total + (Number(item.QTDE_ITENS) || 0)
-                            }, 0)}
+                            </ol>
                         </div>
-                        <div>
-                            Objetos: {filterData.reduce((total, item) => {
-                                return total + (Number(item.QTDE_OBJETOS) || 0)
-                            }, 0)}
-                        </div>
-                        <div>
-                            Volume: {filterData.reduce((total, item) => {
-                                return total + (Number(item.VOLUME) || 0)
-                            }, 0).toFixed(3)}
+
+                        <div className={styles.others}>
+                            <div>
+                                Itens: {filterData.reduce((total, item) =>
+                                    total + (Number(item.QTDE_ITENS) || 0), 0)}
+                            </div>
+                            <div>
+                                Objetos: {filterData.reduce((total, item) =>
+                                    total + (Number(item.QTDE_OBJETOS) || 0), 0)}
+                            </div>
+                            <div>
+                                Volume: {filterData.reduce((total, item) =>
+                                    total + (Number(item.VOLUME) || 0), 0).toFixed(3)}
+                            </div>
                         </div>
                     </div>
                 </section>
