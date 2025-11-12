@@ -13,18 +13,14 @@ $white: #ffffff;
     border-radius: 0.9375rem;
     padding: 1rem;
     border: 1px solid $gray-border;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .blue {
     background-color: $blue-primary;
     color: $white;
     font-weight: bold;
-}
-
-.red {
-    background-color: $red-primary;
-    color: $white;
-    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .container {
@@ -32,7 +28,10 @@ $white: #ffffff;
     padding: 1rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
-    background-color: $gray-border;
+    background-image: url('../images/palco-jpeg.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
 
     .content {
         max-width: 1200px;
