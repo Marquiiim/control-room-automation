@@ -30,7 +30,6 @@ $white: #ffffff;
     border: 1px solid rgba($white, 0.2);
 }
 
-
 .container {
     min-height: 100vh;
     padding: 1rem;
@@ -149,6 +148,71 @@ $white: #ffffff;
                     overflow-y: auto;
                     list-style: none;
 
+                    li:nth-child(1) {
+                        background: linear-gradient(135deg, #FFD700 0%, #FFEC8B 100%);
+                        color: #8B7500;
+                        font-weight: 700;
+                        border-left: 4px solid #FF8C00;
+                        box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+
+                        .itens_loja,
+                        .itens_ext {
+                            background: linear-gradient(135deg, #B8860B 0%, #DAA520 100%);
+                            color: #FFF8DC;
+                            font-weight: 700;
+                            box-shadow: 0 2px 4px rgba(184, 134, 11, 0.4);
+                        }
+                    }
+
+                    li:nth-child(2) {
+                        background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 100%);
+                        color: #696969;
+                        font-weight: 600;
+                        border-left: 4px solid #A9A9A9;
+                        box-shadow: 0 2px 4px rgba(192, 192, 192, 0.3);
+
+                        .itens_loja,
+                        .itens_ext {
+                            background: linear-gradient(135deg, #808080 0%, #A9A9A9 100%);
+                            color: #F5F5F5;
+                            font-weight: 600;
+                            box-shadow: 0 2px 4px rgba(128, 128, 128, 0.4);
+                        }
+                    }
+
+                    li:nth-child(3) {
+                        background: linear-gradient(135deg, #CD7F32 0%, #E8B886 100%);
+                        color: #8B4513;
+                        font-weight: 600;
+                        border-left: 4px solid #8B4513;
+                        box-shadow: 0 2px 4px rgba(205, 127, 50, 0.3);
+
+                        .itens_loja,
+                        .itens_ext {
+                            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+                            color: #FFF8DC;
+                            font-weight: 600;
+                            box-shadow: 0 2px 4px rgba(139, 69, 19, 0.4);
+                        }
+                    }
+
+                    li:nth-child(4),
+                    li:nth-child(5) {
+                        background: linear-gradient(135deg, #87CEEB 0%, #B0E2FF 100%);
+                        color: #2F4F4F;
+                        font-weight: 500;
+                        border-left: 4px solid #4682B4;
+                        box-shadow: 0 2px 4px rgba(135, 206, 235, 0.3);
+
+                        .itens_loja,
+                        .itens_ext {
+                            background: linear-gradient(135deg, #4682B4 0%, #5F9EA0 100%);
+                            color: #F0F8FF;
+                            font-weight: 500;
+                            box-shadow: 0 2px 4px rgba(70, 130, 180, 0.4);
+                        }
+                    }
+
                     li {
                         display: flex;
                         justify-content: space-between;
@@ -170,6 +234,7 @@ $white: #ffffff;
                             font-weight: 500;
                             white-space: nowrap;
                             font-size: 1.2rem;
+                            margin-left: 1rem;
                         }
 
                         .itens_loja {
