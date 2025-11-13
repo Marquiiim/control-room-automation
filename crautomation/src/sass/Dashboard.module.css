@@ -1,5 +1,5 @@
 .card-base, .container .content .sep_dashboard .sep_loja,
-.container .content .sep_dashboard .sep_ext, .container .content .others, .container .content .subtitle_date {
+.container .content .sep_dashboard .sep_ext, .container .content .header .subtitle_date {
   background: #ffffff;
   border-radius: 0.9375rem;
   padding: 1.5rem;
@@ -7,7 +7,7 @@
   box-shadow: 0 0.25rem 0.5rem rgba(73, 80, 87, 0.1);
 }
 
-.gradient-blue, .container .content .others > div, .container .content .subtitle_date {
+.gradient-blue, .container .content .others > div, .container .content .header .subtitle_date {
   background: linear-gradient(135deg, #002B7F 0%, #0043A8 100%);
   color: #ffffff;
   font-weight: bold;
@@ -38,9 +38,14 @@
   height: calc(100vh - 2rem);
   display: flex;
   flex-direction: column;
-  gap: 0.425rem;
+  gap: 0.8rem;
 }
-.container .content .title {
+.container .content .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container .content .header .title {
   color: #ffffff;
   font-size: 2.5rem;
   font-weight: 800;
@@ -48,11 +53,11 @@
   position: relative;
   padding: 0.5rem;
   text-transform: uppercase;
-  flex-shrink: 0;
-  margin-bottom: 0.5rem;
+  flex: 1;
   letter-spacing: 0.09375rem;
+  margin-left: 21rem;
 }
-.container .content .title::after {
+.container .content .header .title::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -63,9 +68,8 @@
   background: linear-gradient(90deg, #E00000, #A80000);
   border-radius: 0.125rem;
 }
-.container .content .subtitle_date {
-  font-size: 1.75rem;
-  flex-shrink: 0;
+.container .content .header .subtitle_date {
+  font-size: 1.5rem;
   letter-spacing: 0.0625rem;
   padding: 1.25rem 2rem;
   border-radius: 0.75rem;
@@ -75,9 +79,9 @@
 }
 .container .content .others {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 10rem;
+  padding-left: 3rem;
 }
 .container .content .others > div {
   padding: 1.25rem 2rem;

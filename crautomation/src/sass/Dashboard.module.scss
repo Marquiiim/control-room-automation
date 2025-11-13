@@ -47,52 +47,56 @@ $white: #ffffff;
         height: calc(100vh - 2rem);
         display: flex;
         flex-direction: column;
-        gap: 0.4250rem;
+        gap: 0.8rem;
 
-        .title {
-            color: $white;
-            font-size: 2.5rem;
-            font-weight: 800;
-            text-align: center;
-            position: relative;
-            padding: 0.5rem;
-            text-transform: uppercase;
-            flex-shrink: 0;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.09375rem;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 5rem;
-                height: 0.1875rem;
-                background: linear-gradient(90deg, $red-primary, $red-secondary);
-                border-radius: 0.125rem;
+            .title {
+                color: $white;
+                font-size: 2.5rem;
+                font-weight: 800;
+                text-align: center;
+                position: relative;
+                padding: 0.5rem;
+                text-transform: uppercase;
+                flex: 1;
+                letter-spacing: 0.09375rem;
+                margin-left: 21rem;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 5rem;
+                    height: 0.1875rem;
+                    background: linear-gradient(90deg, $red-primary, $red-secondary);
+                    border-radius: 0.125rem;
+                }
+            }
+
+            .subtitle_date {
+                @extend .card-base;
+                @extend .gradient-blue;
+                font-size: 1.5rem;
+                letter-spacing: 0.0625rem;
+                padding: 1.25rem 2rem;
+                border-radius: 0.75rem;
+                text-align: center;
+                text-transform: uppercase;
+                min-width: 7.5rem;
             }
         }
 
-        .subtitle_date {
-            @extend .card-base;
-            @extend .gradient-blue;
-            font-size: 1.75rem;
-            flex-shrink: 0;
-            letter-spacing: 0.0625rem;
-            padding: 1.25rem 2rem;
-            border-radius: 0.75rem;
-            text-align: center;
-            text-transform: uppercase;
-            min-width: 7.5rem;
-        }
-
         .others {
-            @extend .card-base;
             display: flex;
-            justify-content: center;
+            justify-content: space-evenly;
             align-items: center;
-            gap: 10rem;
+            padding-left: 3rem;
 
             &>div {
                 @extend .gradient-blue;

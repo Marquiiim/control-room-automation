@@ -39,12 +39,14 @@ function Dashboard() {
     return (
         <section className={styles.container}>
             <div className={styles.content}>
-                <h2 className={styles.title}>
-                    Produtividade separação
-                </h2>
-                <h3 className={styles.subtitle_date}>
-                    {data?.timestamp || '00/00/0000, 00:00:00'}
-                </h3>
+                <header className={styles.header}>
+                    <h2 className={styles.title}>
+                        Produtividade separação
+                    </h2>
+                    <h3 className={styles.subtitle_date}>
+                        {data?.timestamp || '00/00/0000, 00:00:00'}
+                    </h3>
+                </header>
                 <div className={styles.others}>
                     <div>
                         Itens: {filterData.reduce((total, item) => {
