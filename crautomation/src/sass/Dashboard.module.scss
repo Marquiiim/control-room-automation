@@ -23,13 +23,6 @@ $white: #ffffff;
     border: 1px solid rgba($white, 0.2);
 }
 
-.gradient-red {
-    background: linear-gradient(135deg, $red-primary 0%, $red-secondary 100%);
-    color: $white;
-    font-weight: bold;
-    border: 1px solid rgba($white, 0.2);
-}
-
 .container {
     min-height: 100vh;
     padding: 1rem;
@@ -56,34 +49,22 @@ $white: #ffffff;
 
             .title {
                 color: $white;
-                font-size: 2.5rem;
+                font-size: 3rem;
                 font-weight: 800;
                 text-align: center;
                 position: relative;
                 padding: 0.5rem;
                 text-transform: uppercase;
                 flex: 1;
-                letter-spacing: 0.09375rem;
-                margin-left: 21rem;
-
-                &::after {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 5rem;
-                    height: 0.1875rem;
-                    background: linear-gradient(90deg, $red-primary, $red-secondary);
-                    border-radius: 0.125rem;
-                }
+                letter-spacing: 0.2rem;
+                margin-left: 20rem;
             }
 
             .subtitle_date {
                 @extend .card-base;
                 @extend .gradient-blue;
                 font-size: 1.5rem;
-                letter-spacing: 0.0625rem;
+                letter-spacing: 0.1rem;
                 padding: 1.25rem 2rem;
                 border-radius: 0.75rem;
                 text-align: center;
@@ -96,13 +77,14 @@ $white: #ffffff;
             display: flex;
             justify-content: space-evenly;
             align-items: center;
-            padding-left: 3rem;
+            position: relative;
+            padding-left: 3.5rem;
 
             &>div {
                 @extend .gradient-blue;
                 padding: 1.25rem 2rem;
                 border-radius: 0.75rem;
-                font-size: 1.3rem;
+                font-size: 1.5rem;
                 text-align: center;
                 text-transform: uppercase;
                 min-width: 7.5rem;
