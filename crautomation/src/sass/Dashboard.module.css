@@ -26,9 +26,9 @@
   background-repeat: no-repeat;
 }
 .container .content {
-  max-width: 96.875rem;
+  max-width: 2400px;
   margin: 0 auto;
-  height: calc(100vh - 2rem);
+  height: calc(95vh - 2rem);
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
