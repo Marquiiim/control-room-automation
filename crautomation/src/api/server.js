@@ -89,8 +89,8 @@ function filterData(data, columns) {
         return columns.some(columnDesired => column.toUpperCase().includes(columnDesired))
     })
 
-    if (columnsFound.length === 0) {
-        throw new Error(`[SISTEMA] Nenhuma das colunas desejadas foram encontradas, colunas buscadas: ${columns.join(', ')}`)
+    if (columnsFound.length === 0 || columnsFound.length < 5) {
+        throw new Error(`[SISTEMA] O arquivo tem pendência de dados para realizar construção da dashboard, colunas buscadas: ${columns.join(', ')}`)
     }
 
     const filteredData = data.map((line, index) => {
