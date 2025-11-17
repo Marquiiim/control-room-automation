@@ -37,13 +37,9 @@ async function clearUploads() {
 
 app.post('/datareading', upload.single('archive'), async (req, res) => {
 
-    let author
-
     try {
         if (!req.file) throw new Error('Nenhum arquivo enviado.')
-        if (!req.body.author) throw new Error('Autor não informado')
 
-        author = req.body.author
         const reportDate = new Date().toLocaleString('pt-BR')
 
         const workbook = XLSX.readFile(req.file.path)
@@ -55,7 +51,6 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
         await clearUploads()
 
         const log = await registerLog(
-            author,
             req.file.originalname,
             'success'
         )
@@ -64,14 +59,12 @@ app.post('/datareading', upload.single('archive'), async (req, res) => {
             success: true,
             timestamp: reportDate,
             message: '[SISTEMA] Consulta de dados concluída com sucesso.',
-            author: author,
             log: log,
             ...result
         })
 
     } catch (error) {
         const log = await registerLog(
-            author || req.body?.author,
             req.file?.originalname,
             'error',
             error.message
@@ -112,11 +105,10 @@ function filterData(data, columns) {
     return filteredData
 }
 
-async function registerLog(author, archiveName, status, errorReason = null) {
+async function registerLog(archiveName, status, errorReason = null) {
 
     const dataLog = {
         status: status,
-        author: author,
         archive: archiveName,
         timestamp: new Date().toLocaleString('pt-BR')
     }

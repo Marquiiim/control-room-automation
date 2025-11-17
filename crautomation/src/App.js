@@ -11,11 +11,9 @@ function App() {
 
     try {
       const archive = e.target.elements.archive.files[0]
-      const author = e.target.elements.author.value
 
       const formData = new FormData()
       formData.append('archive', archive)
-      formData.append('author', author)
 
       const response = await axios.post('http://localhost:3001/datareading', formData, {
         headers: {
@@ -30,12 +28,13 @@ function App() {
 
         alert('[SISTEMA] Dados enviados com sucesso.')
         setOpenDashboard(true)
+
+        e.target.reset()
       }
 
     } catch (error) {
       const errorMessage = error.response?.data?.error || error.message
       alert(`${errorMessage}", leia as regras e tente novamente.`)
-
       setOpenDashboard(false)
     }
   }
@@ -68,13 +67,6 @@ function App() {
               accept='.xlsx, .xls, .csv'
               required
             />
-            <input type='text'
-              className={styles.name_input}
-              name='author'
-              placeholder='Autor do relatório'
-              required
-            >
-            </input>
           </div>
           <button type='submit' className={styles.report_submission}>
             Enviar para Dashboard

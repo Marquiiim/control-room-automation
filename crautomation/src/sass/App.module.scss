@@ -129,31 +129,6 @@ $transition: all 0.2s ease;
                         }
                     }
                 }
-
-                .name_input {
-                    width: 100%;
-                    padding: 1rem;
-                    border: 1px solid $gray-200;
-                    border-radius: $border-radius;
-                    background: $white;
-                    font-size: 0.9rem;
-                    transition: $transition;
-                    font-family: inherit;
-
-                    &::placeholder {
-                        color: $gray-400;
-                    }
-
-                    &:focus {
-                        outline: none;
-                        border-color: $blue-500;
-                        box-shadow: 0 0 0 3px rgba($blue-500, 0.1);
-                    }
-
-                    &:hover {
-                        border-color: $gray-300;
-                    }
-                }
             }
 
             .report_submission {
