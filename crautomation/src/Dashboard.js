@@ -4,7 +4,7 @@ import styles from './sass/Dashboard.module.css'
 function Dashboard() {
 
     const [data, setData] = useState(null)
-    const [warning, setWarning] = useState(true)
+    const [warning, setWarning] = useState(false)
 
     const loadData = () => {
         const savedData = localStorage.getItem('dashboardData')
@@ -20,12 +20,17 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setWarning(prev => !prev)
-        }, 6000)
+        const mainInterval = setInterval(() => {
+            setWarning(true)
+
+            setTimeout(() => {
+                setWarning(false)
+            }, 4000)
+
+        }, 900000)
 
         return () => {
-            clearInterval(interval)
+            clearInterval(mainInterval)
         }
     }, [])
 
@@ -51,6 +56,12 @@ function Dashboard() {
         <section className={styles.container}>
             <div className={styles.content}>
                 {warning ? (
+                    <div className={styles.warning}>
+                        <h1 className={styles.text_warning}>
+                            !!!SISTEMA DE DASHBOARD EM FASE DE TESTES!!!
+                        </h1>
+                    </div>
+                ) : (
                     <>
                         <header className={styles.header}>
                             <h2 className={styles.title}>
@@ -129,12 +140,6 @@ function Dashboard() {
                             </div>
                         </section>
                     </>
-                ) : (
-                    <div className={styles.warning}>
-                        <h1 className={styles.text_warning}>
-                            !!!SISTEMA DE DASHBOARD EM FASE DE TESTES!!!
-                        </h1>
-                    </div>
                 )}
             </div>
         </section>
