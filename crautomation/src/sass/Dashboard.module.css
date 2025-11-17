@@ -237,4 +237,40 @@
 }
 .container .content .sep_dashboard .sep_ext li {
   border-left-color: #002B7F;
+}
+.container .content .warning {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+}
+.container .content .warning .text_warning {
+  color: #ffffff;
+  padding: 50px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 5rem;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  font-family: "Arial Black", sans-serif;
+  background: transparent;
+  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000;
+  animation: textGlow 1.2s ease-in-out infinite alternate;
+  border: none;
+  box-shadow: none;
+}
+@keyframes textGlow {
+  from {
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+  }
+  to {
+    text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000, 0 0 45px #ff0000, 0 0 60px #ff0000, 0 0 75px #ff0000, 0 0 90px #ff0000;
+  }
 }/*# sourceMappingURL=Dashboard.module.css.map */

@@ -104,30 +104,6 @@
 .container .content form div .file::file-selector-button:hover {
   background: #e5e7eb;
 }
-.container .content form div .name_input {
-  width: 100%;
-  padding: 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  background: #ffffff;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-  font-family: inherit;
-}
-.container .content form div .name_input::-moz-placeholder {
-  color: #9ca3af;
-}
-.container .content form div .name_input::placeholder {
-  color: #9ca3af;
-}
-.container .content form div .name_input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-.container .content form div .name_input:hover {
-  border-color: #d1d5db;
-}
 .container .content form .report_submission {
   background: #3b82f6;
   color: #ffffff;
