@@ -53,10 +53,13 @@ function App() {
         </div>
         <ul className={styles.system_rules}>
           <li>
-            Selecione um arquivo nos formatos: .xlsx, .xls ou .csv - formatos compatíveis com Excel
+            Selecione um arquivo nos formatos: .xlsx, .xls ou .csv - formatos compatíveis com Excel.
           </li>
           <li>
             Verifique se o arquivo contém dados - arquivos vazios não podem ser processados.
+          </li>
+          <li>
+            Verifique se já há uma dashboard aberta em outra aba antes de abrir mais uma.
           </li>
         </ul>
         <form onSubmit={handleSubmit}>
