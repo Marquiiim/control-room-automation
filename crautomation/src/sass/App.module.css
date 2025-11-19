@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .container {
   min-height: 100vh;
   background: #f9fafb;
@@ -19,90 +18,112 @@
 }
 .container .content .title {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #f3f4f6;
+  position: relative;
+}
+.container .content .title::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #1f2937, #2563eb);
+  border-radius: 2px;
 }
 .container .content .title img {
-  height: 50px;
+  height: 60px;
   margin-bottom: 1.5rem;
+  filter: brightness(0.9);
 }
 .container .content .title h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: #1f2937;
   margin: 0 0 1rem 0;
-  line-height: 1.4;
+  line-height: 1.3;
+  background: linear-gradient(135deg, #1f2937, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.025em;
 }
 .container .content .title h3 {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #4b5563;
   margin: 0;
   font-weight: 400;
-}
-.container .content .system_rules {
-  list-style: none;
-  padding: 0;
-  margin: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.container .content .system_rules li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.875rem 1rem;
+  line-height: 1.5;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
   background: #f9fafb;
   border-radius: 6px;
-  border: 1px solid #e5e7eb;
-  color: #4b5563;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-.container .content .system_rules li::before {
-  content: "•";
-  color: #3b82f6;
-  font-weight: bold;
-  font-size: 1.2rem;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
+  border-left: 3px solid #3b82f6;
 }
 .container .content form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
-.container .content form div {
-  display: flex;
-  flex-direction: column;
   gap: 1rem;
 }
-.container .content form div .file {
+.container .content form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+  cursor: pointer;
+}
+.container .content form label:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.02);
+}
+.container .content form label:focus-within {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.container .content form label span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+  padding: 0.5rem;
+  background: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+}
+.container .content form label .file {
   width: 100%;
   padding: 1rem;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   background: #ffffff;
   font-size: 0.9rem;
-  transition: all 0.2s ease;
+  cursor: pointer;
 }
-.container .content form div .file:focus {
+.container .content form label .file:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
-.container .content form div .file::file-selector-button {
-  background: #f3f4f6;
-  color: #1f2937;
-  border: 1px solid #d1d5db;
+.container .content form label .file::file-selector-button {
+  background: #3b82f6;
+  color: #ffffff;
+  border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   margin-right: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
-.container .content form div .file::file-selector-button:hover {
-  background: #e5e7eb;
+.container .content form label .file::file-selector-button:hover {
+  background: #2563eb;
 }
 .container .content form .report_submission {
   background: #3b82f6;
@@ -113,7 +134,6 @@
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 .container .content form .report_submission:hover {
   background: #2563eb;
@@ -130,7 +150,6 @@
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
   margin-top: 0.5rem;
   text-align: center;
   color: #ffffff;

@@ -47,30 +47,32 @@ function App() {
           <h1>
             Ranking de produtividade - Sala de Controle
           </h1>
-          <h3>
-            Se atente as regras antes de importar o arquivo para o sistema!
-          </h3>
         </div>
-        <ul className={styles.system_rules}>
-          <li>
-            Selecione um arquivo nos formatos: .xlsx, .xls ou .csv - formatos compatíveis com Excel.
-          </li>
-          <li>
-            Verifique se o arquivo contém dados - arquivos vazios não podem ser processados.
-          </li>
-          <li>
-            Verifique se já há uma dashboard aberta em outra aba antes de abrir mais uma.
-          </li>
-        </ul>
         <form onSubmit={handleSubmit}>
-          <div>
+          <label>
+            <span>
+              Arquivo da base
+            </span>
             <input type='file'
               className={styles.file}
-              name='archive'
+              name='base_archive'
               accept='.xlsx, .xls, .csv'
               required
             />
-          </div>
+          </label>
+
+          <label>
+            <span>
+              Arquivo de performance
+            </span>
+            <input type='file'
+              className={styles.file}
+              name='performance_archive'
+              accept='.xlsx, .xls, .csv'
+              required
+            />
+          </label>
+
           <button type='submit' className={styles.report_submission}>
             Enviar para Dashboard
           </button>
