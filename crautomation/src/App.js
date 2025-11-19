@@ -10,10 +10,12 @@ function App() {
     e.preventDefault()
 
     try {
-      const archive = e.target.elements.archive.files[0]
+      const base_archive = e.target.elements.base_archive.files[0]
+      const performance_archive = e.target.elements.performance_archive.files[0]
 
       const formData = new FormData()
-      formData.append('archive', archive)
+      formData.append('base_archive', base_archive)
+      formData.append('performance_archive', performance_archive)
 
       const response = await axios.post('http://localhost:3001/datareading', formData, {
         headers: {
@@ -34,7 +36,7 @@ function App() {
 
     } catch (error) {
       const errorMessage = error.response?.data?.error || error.message
-      alert(`${errorMessage}", leia as regras e tente novamente.`)
+      alert(`${errorMessage}, leia as regras e tente novamente.`)
       setOpenDashboard(false)
     }
   }
@@ -49,7 +51,7 @@ function App() {
           </h1>
         </div>
         <form onSubmit={handleSubmit}>
-          <label>
+          <label htmlFor="base_archive">
             <span>
               Arquivo da base
             </span>
@@ -61,7 +63,7 @@ function App() {
             />
           </label>
 
-          <label>
+          <label htmlFor="performance_archive">
             <span>
               Arquivo de performance
             </span>
