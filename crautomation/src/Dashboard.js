@@ -71,13 +71,13 @@ function Dashboard() {
                         </header>
                         <div className={styles.others}>
                             <div>
-                                Itens:
+                                Itens: {data?.forDash.metrics[0].QTDE_ITENS || 0}
                             </div>
                             <div>
-                                Objetos:
+                                Objetos: {data?.forDash.metrics[0].QTDE_OBJETOS || 0}
                             </div>
                             <div>
-                                Volume:
+                                Volume: {data?.forDash.metrics[0].VOLUME || 0}
                             </div>
                         </div>
                         <section className={styles.sep_dashboard}>
@@ -86,16 +86,13 @@ function Dashboard() {
                                     Separação Loja
                                 </h3>
                                 <ol>
-                                    {data && Object.entries(data)
-                                        .sort((A, B) =>
-                                            Number(B[1]?.QTDE_ITENS || 0) - Number(A[1]?.QTDE_ITENS || 0)
-                                        )
+                                    {data && Object.entries(data.forDash.loja)
                                         .map(([index, value]) =>
                                         (
                                             <li key={index}>
                                                 {value?.USUARIO || 'N/A'}
                                                 <span className={styles.itens_loja}>
-                                                    {value?.QTDE_ITENS || 0}
+                                                    {value?.ITEMSEPARADO || 0}
                                                 </span>
                                             </li>
                                         ))}
@@ -106,20 +103,12 @@ function Dashboard() {
                                     Separação Externa
                                 </h3>
                                 <ol>
-                                    {data && Object.entries(data)
-                                        .filter(([key, value]) =>
-                                            value &&
-                                            value.TIPO &&
-                                            value.TIPO.startsWith('2 - Separador Externa')
-                                        )
-                                        .sort((A, B) =>
-                                            Number(B[1]?.QTDE_ITENS || 0) - Number(A[1]?.QTDE_ITENS || 0)
-                                        )
+                                    {data && Object.entries(data.forDash.externa)
                                         .map(([key, value]) => (
                                             <li key={key}>
                                                 {value?.USUARIO || 'N/A'}
                                                 <span className={styles.itens_ext}>
-                                                    {value?.QTDE_ITENS || 0}
+                                                    {value?.ITEMSEPARADO || 0}
                                                 </span>
                                             </li>
                                         ))}

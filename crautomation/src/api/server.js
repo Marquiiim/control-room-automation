@@ -156,7 +156,7 @@ async function structureTable(base, performance) {
     metrics.push({
         QTDE_ITENS: itemsTotal,
         QTDE_OBJETOS: objectsTotal,
-        VOLUME: volumeTotal
+        VOLUME: Number(volumeTotal).toFixed(3)
     })
 
     return {
