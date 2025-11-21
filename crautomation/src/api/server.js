@@ -62,8 +62,10 @@ app.post('/datareading', upload.fields([
         const baseData = await workBook(baseFile)
         const performanceData = await workBook(performanceFile)
 
-        const baseResult = filterData(baseData, base_columns, 'base')
-        const performanceResult = filterData(performanceData, performance_columns, 'performance')
+        const baseResult = { base: await filterData(baseData, base_columns, 'base') }
+        const performanceResult = { performance: await filterData(performanceData, performance_columns, 'performance') }
+
+        const dataStructuring = await structureTable(baseResult.base, performanceResult.performance)
 
         await clearUploads()
 
@@ -78,9 +80,10 @@ app.post('/datareading', upload.fields([
             message: '[SISTEMA] Consulta de dados concluída com sucesso.',
             log: log,
             result: {
-                base: baseResult,
-                performance: performanceResult
-            }
+                baseResult,
+                performanceResult
+            },
+            forDash: dataStructuring
         })
 
     } catch (error) {
@@ -109,24 +112,60 @@ async function workBook(file) {
     return data
 }
 
-async function filterData(data, columns, filetype) {
+async function structureTable(base, performance) {
+    const externa = {}
+    const loja = {}
+    const metrics = []
 
-    console.log(`=== FILTER DATA ${filetype} ===`) // DEBUG
-    console.log('Dados recebidos:', data.length, 'linhas') // DEBUG
-    console.log('Primeira linha:', data[0]) // DEBUG
+    performance.forEach(perfEntry => {
+        const user = perfEntry['USUARIO']
+        const type = perfEntry['TIPO']
+
+        const baseData = base.find(baseEntry => {
+            return baseEntry['USUARIO'] && user && baseEntry['USUARIO'].toString().toUpperCase().trim() === user.toString().toUpperCase().trim()
+        })
+
+        console.log(baseData)
+
+        if (type === '2 - Separador Externa') {
+            externa[baseData.id] = {
+                USUARIO: user,
+                ITEMSEPARADO: baseData ? baseData['ITEMSEPARADO'] || 0 : 0
+            }
+        } else if (type === '1 - Separador Loja') {
+            loja[baseData.id] = {
+                USUARIO: user,
+                ITEMSEPARADO: baseData ? baseData['ITEMSEPARADO'] || 0 : 0
+            }
+        }
+
+        /*metrics.push({
+            QTDE_ITENS: itensTotal,
+            QTDE_OBJETOS: objectsTotal,
+            VOLUME: volumeTotal
+        })*/
+
+        console.log(`Items: ..., Objects: ..., Volume: ...`)
+    })
+
+    return {
+        externa: Object.values(externa),
+        loja: Object.values(loja),
+        metrics
+    }
+}
+
+async function filterData(data, columns, filetype) {
 
     if (!data || data.length === 0) {
         throw new Error('[SISTEMA] Planilha vazia ou sem dados')
     }
 
     const totalColumns = Object.keys(data[0] || {})
-    console.log('Colunas totais:', totalColumns) // DEBUG
 
     const columnsFound = totalColumns.filter(column => {
         return columns.some(columnDesired => column.toUpperCase().includes(columnDesired))
     })
-
-    console.log('Colunas encontradas:', columnsFound) // DEBUG
 
     const minColumns = filetype === 'performance' ? 3 : 1
 
@@ -134,7 +173,9 @@ async function filterData(data, columns, filetype) {
         throw new Error(`[SISTEMA] O arquivo tem pendência de dados para realizar construção da dashboard, colunas buscadas: ${base_columns.join(', ')} e ${performance_columns.join(', ')}`)
     }
 
-    const filteredData = data.map((line, index) => {
+    const dataWithoutLastLine = data.slice(0, -1)
+
+    const filteredData = dataWithoutLastLine.map((line, index) => {
         const lineFiltered = { id: index + 1 }
 
         columnsFound.forEach(column => {
@@ -142,9 +183,6 @@ async function filterData(data, columns, filetype) {
         });
         return lineFiltered
     })
-
-    console.log('Dados filtrados:', filteredData.length, 'linhas') // DEBUG
-    console.log('Primeira linha filtrada:', filteredData[0]) // DEBUG
 
     return filteredData
 }
