@@ -117,6 +117,10 @@ async function structureTable(base, performance) {
     const loja = {}
     const metrics = []
 
+    let itemsTotal = 0
+    let objectsTotal = 0
+    let volumeTotal = 0
+
     performance.forEach(perfEntry => {
         const user = perfEntry['USUARIO']
         const type = perfEntry['TIPO']
@@ -125,27 +129,27 @@ async function structureTable(base, performance) {
             return baseEntry['USUARIO'] && user && baseEntry['USUARIO'].toString().toUpperCase().trim() === user.toString().toUpperCase().trim()
         })
 
-        console.log(baseData)
-
         if (type === '2 - Separador Externa') {
-            externa[baseData.id] = {
+            externa[user] = {
                 USUARIO: user,
                 ITEMSEPARADO: baseData ? baseData['ITEMSEPARADO'] || 0 : 0
             }
         } else if (type === '1 - Separador Loja') {
-            loja[baseData.id] = {
+            loja[user] = {
                 USUARIO: user,
                 ITEMSEPARADO: baseData ? baseData['ITEMSEPARADO'] || 0 : 0
             }
         }
 
-        /*metrics.push({
-            QTDE_ITENS: itensTotal,
+        itemsTotal += Array.isArray(perfEntry['QTDE_ITENS']) ? perfEntry['QTDE_ITENS'].reduce((total, item) => total + Number(item || 0), 0) : Number(perfEntry['QTDE_ITENS'] || 0)
+        objectsTotal += Array.isArray(perfEntry['QTDE_OBJETOS']) ? perfEntry['QTDE_OBJETOS'].reduce((total, item) => total + Number(item || 0), 0) : Number(perfEntry['QTDE_OBJETOS'] || 0)
+        volumeTotal += Array.isArray(perfEntry['VOLUME']) ? perfEntry['VOLUME'].reduce((total, item) => total + Number(item || 0), 0) : Number(perfEntry['VOLUME'] || 0)
+
+        metrics.push({
+            QTDE_ITENS: itemsTotal,
             QTDE_OBJETOS: objectsTotal,
             VOLUME: volumeTotal
-        })*/
-
-        console.log(`Items: ..., Objects: ..., Volume: ...`)
+        })
     })
 
     return {
