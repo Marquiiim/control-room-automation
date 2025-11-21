@@ -144,17 +144,24 @@ async function structureTable(base, performance) {
         itemsTotal += Array.isArray(perfEntry['QTDE_ITENS']) ? perfEntry['QTDE_ITENS'].reduce((total, item) => total + Number(item || 0), 0) : Number(perfEntry['QTDE_ITENS'] || 0)
         objectsTotal += Array.isArray(perfEntry['QTDE_OBJETOS']) ? perfEntry['QTDE_OBJETOS'].reduce((total, item) => total + Number(item || 0), 0) : Number(perfEntry['QTDE_OBJETOS'] || 0)
         volumeTotal += Array.isArray(perfEntry['VOLUME']) ? perfEntry['VOLUME'].reduce((total, item) => total + Number(item || 0), 0) : Number(perfEntry['VOLUME'] || 0)
+    })
 
-        metrics.push({
-            QTDE_ITENS: itemsTotal,
-            QTDE_OBJETOS: objectsTotal,
-            VOLUME: volumeTotal
-        })
+    const externaSorted = Object.values(externa).sort((A, B) => {
+        return Number(B.ITEMSEPARADO) - Number(A.ITEMSEPARADO)
+    })
+    const lojaSorted = Object.values(loja).sort((A, B) => {
+        return Number(B.ITEMSEPARADO) - Number(A.ITEMSEPARADO)
+    })
+
+    metrics.push({
+        QTDE_ITENS: itemsTotal,
+        QTDE_OBJETOS: objectsTotal,
+        VOLUME: volumeTotal
     })
 
     return {
-        externa: Object.values(externa),
-        loja: Object.values(loja),
+        externa: externaSorted,
+        loja: lojaSorted,
         metrics
     }
 }

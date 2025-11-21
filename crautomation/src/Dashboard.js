@@ -50,8 +50,6 @@ function Dashboard() {
         }
     }, [])
 
-    const filterData = data ? Object.values(data).filter(item => item.TIPO !== "TOTAL") : []
-
     return (
         <section className={styles.container}>
             <div className={styles.content}>
@@ -73,19 +71,13 @@ function Dashboard() {
                         </header>
                         <div className={styles.others}>
                             <div>
-                                Itens: {filterData.reduce((total, item) => {
-                                    return total + (Number(item.QTDE_ITENS) || 0)
-                                }, 0)}
+                                Itens:
                             </div>
                             <div>
-                                Objetos: {filterData.reduce((total, item) => {
-                                    return total + (Number(item.QTDE_OBJETOS) || 0)
-                                }, 0)}
+                                Objetos:
                             </div>
                             <div>
-                                Volume: {filterData.reduce((total, item) => {
-                                    return total + (Number(item.VOLUME) || 0)
-                                }, 0).toFixed(3)}
+                                Volume:
                             </div>
                         </div>
                         <section className={styles.sep_dashboard}>
@@ -95,11 +87,6 @@ function Dashboard() {
                                 </h3>
                                 <ol>
                                     {data && Object.entries(data)
-                                        .filter(([key, value]) =>
-                                            value &&
-                                            value.TIPO &&
-                                            value.TIPO.startsWith('1 - Separador Loja')
-                                        )
                                         .sort((A, B) =>
                                             Number(B[1]?.QTDE_ITENS || 0) - Number(A[1]?.QTDE_ITENS || 0)
                                         )
